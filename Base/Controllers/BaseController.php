@@ -24,9 +24,19 @@ class BaseController
         echo $name." function does not exist";
     }
 
-    public function notFound()
+    public function NotFound()
     {
-        echo 'Error 404 Not Found';
+        $this->Exception("Class not found");
+    }
+
+    public function InvalidArguments()
+    {
+        $this->Exception("Invalid Arguments");
+    }
+
+    public function Exception($message = 'Exception')
+    {
+        throw new \Exception($message);
     }
 
     public function render($fileName,$data = [])
