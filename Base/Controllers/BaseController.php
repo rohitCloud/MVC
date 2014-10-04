@@ -19,9 +19,9 @@ class BaseController
 
     }
 
-    public function __call($name,$args)
+    public function __call($name, $args)
     {
-        echo $name." function does not exist";
+        echo $name . " function does not exist";
     }
 
     public function NotFound()
@@ -39,50 +39,42 @@ class BaseController
         throw new \Exception($message);
     }
 
-    public function render($fileName,$data = [])
+    public function render($fileName, $data = [])
     {
-        $file = str_replace('.','/',$fileName);
-        $filePath = APP_DIR.'Views/'.$file.'.php';
-        if(!is_file($filePath))
-        {
-            throw new \Exception($fileName.' View does not exist');
+        $file = str_replace('.', '/', $fileName);
+        $filePath = APP_DIR . 'Views/' . $file . '.php';
+        if (!is_file($filePath)) {
+            throw new \Exception($fileName . ' View does not exist');
         }
-        foreach($data as $key=>$value)
-        {
+        foreach ($data as $key => $value) {
             $$key = $value;
         }
         include $filePath;
     }
+
     public function model($model = '')
     {
-        if(empty($model))
-        {
+        if (empty($model)) {
             return false;
         }
         $modelClass = "\\Application\\Models\\$model";
-        if(class_exists($modelClass))
-        {
+        if (class_exists($modelClass)) {
             return new $modelClass;
-        }
-        else
-        {
-            throw new \Exception('Model does not exist '. $model);
+        } else {
+            throw new \Exception('Model does not exist ' . $model);
         }
     }
+
     public function library($library = '')
     {
-        if(empty($library))
-        {
+        if (empty($library)) {
             return false;
         }
         $libraryClass = "\\Application\\Libraries\\$library";
-        if(class_exists($libraryClass))
-        {
+        if (class_exists($libraryClass)) {
             return new $libraryClass;
-        }
-        else
-        {
-            throw new \Exception('Model does not exist '. $model);
+        } else {
+            throw new \Exception('Model does not exist ' . $model);
         }
     }
 }

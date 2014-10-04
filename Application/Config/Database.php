@@ -8,13 +8,13 @@
 
 namespace Application\Config;
 
-class Database
+class Database extends Config
 {
-    protected  $dbName = 'swift';
+    const DB_NAME = 'swift';
 
-    protected $dbUser = 'root';
+    const DB_USER = 'root';
 
-    protected $dbPass = '';
+    const DB_PASS = '';
 
-    protected $dbHost = 'localhost';
+    const DB_HOST = 'localhost';
 }

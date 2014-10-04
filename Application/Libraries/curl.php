@@ -12,7 +12,7 @@ class curl
     public function curl($url)
     {
         $ch = curl_init($url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         return curl_exec($ch);
     }
 }

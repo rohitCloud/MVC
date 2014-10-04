@@ -7,7 +7,9 @@
  */
 namespace Base\Models;
 
-class BaseModel extends \Application\Config\Database
+use Application\Config\Database;
+
+class BaseModel
 {
     private $connection;
 
@@ -23,7 +25,7 @@ class BaseModel extends \Application\Config\Database
 
     public function connect()
     {
-        $connection = mysqli_connect($this->dbHost,$this->dbUser,$this->dbPass,$this->dbName);
+        $connection = mysqli_connect(Database::DB_HOST, Database::DB_USER, Database::DB_PASS, Database::DB_NAME);
         $this->connection = $connection;
         return $connection;
     }
@@ -33,25 +35,20 @@ class BaseModel extends \Application\Config\Database
         mysqli_close($connection);
     }
 
-    public function query($query,$output = false)
+    public function query($query, $output = false)
     {
         $data = [];
-        $result = mysqli_query($this->connection,$query);
-        if(!$result)
-        {
+        $result = mysqli_query($this->connection, $query);
+        if (!$result) {
             printf("Errormessage: %s\n", mysqli_error($this->connection));
             return false;
         }
-        if($output === true)
-        {
-            while($row = mysqli_fetch_assoc($result))
-            {
+        if ($output === true) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $data[] = $row;
             }
             return $data;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }

@@ -8,12 +8,14 @@
 
 namespace Application\Models;
 
-class DbTestModel extends \Base\Models\BaseModel
+use Base\Models\BaseModel;
+
+class DbTestModel extends BaseModel
 {
     public function getData()
     {
         $connection = $this->connect();
-        return $this->query('select * from swcron',true);
+        return $this->query('select * from swcron', true);
         $this->disconnect($connection);
     }
 }

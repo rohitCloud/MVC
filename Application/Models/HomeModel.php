@@ -7,12 +7,14 @@
  */
 namespace Application\Models;
 
-class HomeModel extends \Base\Models\BaseModel
+use Base\Models\BaseModel;
+
+class HomeModel extends BaseModel
 {
     public function getCrons()
     {
         $conn = $this->connect();
-        return $this->query('select * from swcron',true);
+        return $this->query('select * from swcron', true);
         $this->disconnect($conn);
     }
 }
