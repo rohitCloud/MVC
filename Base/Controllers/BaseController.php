@@ -24,12 +24,12 @@ class BaseController
         echo $name . " function does not exist";
     }
 
-    public function NotFound()
+    public function notFound()
     {
         $this->Exception("Class not found");
     }
 
-    public function InvalidArguments()
+    public function invalidArguments()
     {
         $this->Exception("Invalid Arguments");
     }
@@ -50,31 +50,5 @@ class BaseController
             $$key = $value;
         }
         include $filePath;
-    }
-
-    public function model($model = '')
-    {
-        if (empty($model)) {
-            return false;
-        }
-        $modelClass = "\\Application\\Models\\$model";
-        if (class_exists($modelClass)) {
-            return new $modelClass;
-        } else {
-            throw new \Exception('Model does not exist ' . $model);
-        }
-    }
-
-    public function library($library = '')
-    {
-        if (empty($library)) {
-            return false;
-        }
-        $libraryClass = "\\Application\\Libraries\\$library";
-        if (class_exists($libraryClass)) {
-            return new $libraryClass;
-        } else {
-            throw new \Exception('Model does not exist ' . $model);
-        }
     }
 }

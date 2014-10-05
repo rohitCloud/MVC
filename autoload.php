@@ -70,9 +70,9 @@ if (!class_exists($CallController)) {
 $Obj = new $CallController;
 
 try {
-    $ReflectionMethod = new ReflectionMethod($Obj,  $method);
+    $ReflectionMethod = new ReflectionMethod($Obj, $method);
     $ReflectionMethod->getNumberOfParameters() == count($params) ?
-        $ReflectionMethod->invokeArgs($Obj, $params) : $Obj->InvalidArguments();
+        $ReflectionMethod->invokeArgs($Obj, $params) : $Obj->invalidArguments();
 } catch (Exception $e) {
     echo "<h1>Caught exception: {$e->getMessage()}</h1>";
 }

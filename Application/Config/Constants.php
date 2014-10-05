@@ -7,5 +7,5 @@ namespace Application\Config;
 
 Class Constants extends Config
 {
-    const NOT_FOUND = 'NotFound';
+    const NOT_FOUND = 'notFound';
 }

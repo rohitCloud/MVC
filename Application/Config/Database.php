@@ -10,7 +10,7 @@ namespace Application\Config;
 
 class Database extends Config
 {
-    const DB_NAME = 'swift';
+    const DB_NAME = 'MVC';
 
     const DB_USER = 'root';
 
