@@ -6,13 +6,12 @@
  * Time: 11:34 AM
  */
 
-use Application\Config\Config;
+use Application\Config\Constants;
 
 function autoload($className)
 {
     $className = ltrim($className, '\\');
     $fileName = '';
-    $namespace = '';
     if ($lastNsPos = strrpos($className, '\\')) {
         $namespace = substr($className, 0, $lastNsPos);
         $className = substr($className, $lastNsPos + 1);
@@ -34,14 +33,14 @@ function getControllerMethod()
         $parts = explode('/', $URI);
     }
     if (isset($parts[1]) && !empty($parts[1])) {
-        $contoller = $parts[1];
+        $controller = $parts[1];
     } else {
-        $contoller = Config::BASE_CONTROLLER;
+        $controller = Constants::BASE_CONTROLLER;
     }
     if (isset($parts[2]) && !empty($parts[2])) {
         $method = $parts[2];
     } else {
-        $method = Config::BASE_METHOD;
+        $method = Constants::BASE_METHOD;
     }
     if (count($parts) > 3 && count($parts) <= 6) {
         for ($i = 3; $i < count($parts); $i++) {
@@ -51,7 +50,7 @@ function getControllerMethod()
     } else if (count($parts) > 6) {
         $method = 'InvalidArguments';
     }
-    return ['controller' => $contoller, 'method' => $method, 'params' => $params];
+    return ['controller' => $controller, 'method' => $method, 'params' => $params];
 }
 
 spl_autoload_register('autoload');
@@ -63,14 +62,15 @@ $method = $controllerMethod['method'];
 $params = $controllerMethod['params'];
 
 if (!class_exists($CallController)) {
-    $CallController = "Application\\Controllers\\" . Config::BASE_CONTROLLER;
-    $method = 'NotFound';
+    $CallController = "Application\\Controllers\\" . Constants::BASE_CONTROLLER;
+    $method = Constants::NOT_FOUND;
 }
 
+/* @var $Obj \Application\Controllers\BaseController */
 $Obj = new $CallController;
 
 try {
-    $ReflectionMethod = new ReflectionMethod($Obj, $method);
+    $ReflectionMethod = new ReflectionMethod($Obj,  $method);
     $ReflectionMethod->getNumberOfParameters() == count($params) ?
         $ReflectionMethod->invokeArgs($Obj, $params) : $Obj->InvalidArguments();
 } catch (Exception $e) {

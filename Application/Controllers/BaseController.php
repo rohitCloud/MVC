@@ -2,15 +2,12 @@
 
 namespace Application\Controllers;
 
-class BaseController extends \Base\Controllers\BaseController
+use Base\Controllers;
+
+class BaseController extends Controllers\BaseController
 {
     public function index()
     {
-        echo json_encode($_POST);
-    }
-
-    public function TestArgs($firstArg, $secondArg)
-    {
-        echo $firstArg;
+        $this->render('Home.home');
     }
 }

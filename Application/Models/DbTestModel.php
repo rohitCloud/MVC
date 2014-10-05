@@ -8,8 +8,6 @@
 
 namespace Application\Models;
 
-use Base\Models\BaseModel;
-
 class DbTestModel extends BaseModel
 {
     public function getData()

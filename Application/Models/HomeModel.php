@@ -5,9 +5,8 @@
  * Date: 5/27/14
  * Time: 3:58 PM
  */
-namespace Application\Models;
 
-use Base\Models\BaseModel;
+namespace Application\Models;
 
 class HomeModel extends BaseModel
 {
